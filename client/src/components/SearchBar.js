@@ -5,7 +5,9 @@ function SearchBar(){
 
     return (
         <div>
-            <h1>SearchBar comp</h1>
+            <h2 className="search-name">Search Recipes</h2>
         </div>
     )
 }
+
+export default SearchBar;

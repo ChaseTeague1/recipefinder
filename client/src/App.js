@@ -10,7 +10,7 @@ import LoginSignup from "./pages/LoginSignup";
 console.log("React version:", React.version);
 function App() {
   return (
-    <>
+    <div className="app-container">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -20,7 +20,7 @@ function App() {
         {/* Optional 404 page */}
         <Route path="*" element={<h1>404 Page Not Found</h1>} />
       </Routes>
-    </>
+    </div>
   );
 }
 

@@ -1,10 +1,11 @@
 import React from "react";
+import RecipeCard from "../components/RecipeCard";
 
 
-function BrowseRecipe(){
+function BrowseRecipe({recipes}){
     return (
         <div>
-            <h1>BrowseRecipe page</h1>
+       
         </div>
     )
 }

@@ -1,11 +1,13 @@
 import React from "react";
 
 
-function RecipeCard(){
+function RecipeCard({recipe}){
     
     return (
-        <div>
-            <h1>RecipeCard comp</h1>
+        <div className="recipe-card">
+            <img src={recipe.image}/>
+            <h1>{recipe.title}</h1>
+            <p>{recipe.description}</p>
         </div>
     )
 }
