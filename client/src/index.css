@@ -230,3 +230,28 @@ body {
   flex-wrap: wrap;
   justify-content: center;
 }
+
+
+/*Post recipe styling */
+.post-recipe-container{
+  display: grid;
+  justify-content: center;
+  margin: 2rem;
+}
+
+.post-recipe-container button{
+  margin: 1rem;
+  min-width: 5vw;
+  border-radius: 15px;
+  padding: 10px;
+  font-size: larger;
+  background-color: #f78f1e;
+  color: white;
+  font-weight: 900;
+}
+
+.post-recipe-container button:hover{
+  background-color: #e07b15;
+  transform: scale(1.02);
+  cursor: pointer;
+}
