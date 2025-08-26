@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 
 function PostRecipe(){
+
+    useEffect(() => {
+        fetch('/recipes', {
+            method: 'POST'
+        })
+    }, [])
+
+
     return (
-        <div className="post-recipe-container">
+        <form className="post-recipe-container">
             <h1>Add your own recipe!</h1>
             <label>Title</label>
             <input />
-            <label>Time</label>
+            <label>Time (in min)</label>
             <input />
             <label>Description</label>
             <textarea />
@@ -15,10 +23,10 @@ function PostRecipe(){
             <textarea />
             <label>Instructions</label>
             <textarea />
-            <label>Image</label>
+            <label>Image link</label>
             <input />
-            <button>Add Recipe!</button>
-        </div>
+            <button>Add Recipe</button>
+        </form>
     )
 }
 
