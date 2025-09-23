@@ -3,11 +3,6 @@ import React, { useEffect } from "react";
 
 function PostRecipe(){
 
-    useEffect(() => {
-        fetch('/recipes', {
-            method: 'POST'
-        })
-    }, [])
 
 
     return (

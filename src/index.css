@@ -196,7 +196,8 @@ body {
 
 /*Recipecard styles*/
 .recipe-card{
-  width: 10vw;
+  max-width: 10vw;
+  min-width: 10vw;
   justify-content: center;
   display: grid;
   max-height: 30vh;
@@ -208,7 +209,9 @@ body {
 
 .image-div{
   max-width: 10vw;
+  min-width: 10vw;
   max-height: 15vh;
+  min-height: 15vh;
   border-radius: 10px;
   margin: 0;
 }

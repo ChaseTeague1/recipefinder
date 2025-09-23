@@ -2,13 +2,6 @@ import React, {useState, useEffect} from "react";
 import SearchBar from "../components/SearchBar";
 
 function Home(){
-    const [recipes, setRecipes] = useState([])
-    
-    useEffect(() => {
-        fetch('/recipes')
-        .then(res => res.json())
-        .then(data => setRecipes(data))
-    },[])
 
     return (
         <div className="home-container">

@@ -16,6 +16,8 @@ class CheckSession(Resource):
 
 api.add_resource(CheckSession, '/check_session')
 
+
+#User related section
 class Users(Resource):
     def get(self):
         users = [user.to_dict() for user in User.query.all()]
@@ -24,12 +26,36 @@ class Users(Resource):
 
 api.add_resource(Users, '/users')
 
+
+#Recipe section
 class Recipes(Resource):
     def get(self):
         recipes = [recipe.to_dict() for recipe in Recipe.query.all()]
 
         return make_response(recipes, 200)
     
+    def post(self):
+        data = request.get_json()
+        user_id = session.get('user_id')
+
+        new_recipe = Recipe(
+            title = data['title'],
+            instructions = data['instructions'],
+            description = data['description'],
+            ingredients = data['ingredients'],
+            calories = data['calories'],
+            protein = data['protein'],
+            carbs = data['carbs'],
+            fats = data['fats'],
+            time = data['time'],
+            image = data['image'],
+            user_id = user_id
+        )
+        db.session.add(new_recipe)
+        db.session.commit()
+
+        return make_response(new_recipe.to_dict(), 201)
+
 api.add_resource(Recipes, '/recipes')
 
 

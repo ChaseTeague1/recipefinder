@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/NavBar";
 import Home from "./pages/Home";
@@ -9,12 +9,20 @@ import LoginSignup from "./pages/LoginSignup";
 
 console.log("React version:", React.version);
 function App() {
+    const [recipes, setRecipes] = useState([])
+      
+    useEffect(() => {
+        fetch('/recipes')
+        .then(res => res.json())
+        .then(data => setRecipes(data))
+    },[])
+
   return (
     <div className="app-container">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/browse" element={<BrowseRecipe />} />
+        <Route path="/browse" element={<BrowseRecipe recipes={recipes}/>} />
         <Route path="/post" element={<PostRecipe />} />
         <Route path="/login" element={<LoginSignup />} />
         {/* Optional 404 page */}
