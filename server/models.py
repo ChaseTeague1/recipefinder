@@ -12,8 +12,24 @@ class Recipe(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False)
+
+    #Multiple ingredients and instructions
     ingredients = db.Column(db.String, nullable=False)
+    instructions = db.Column(db.String, nullable=False)
+
+    #Nutrition section
+    calories = db.Column(db.Integer)
+    protein = db.Column(db.Integer)
+    carbs = db.Column(db.Integer)
+    fats = db.Column(db.Integer)
+
+    # General Info
+    time = db.Column(db.Integer)
     image = db.Column(db.String)
+
+    #relationships
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    user = db.relationship("User", backref='recipes')
 
 
 
@@ -23,4 +39,5 @@ class User(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
 
     username = db.Column(db.String, nullable=False)
+    email = db.Column(db.String, nullable=False)
     

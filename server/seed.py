@@ -10,11 +10,16 @@ if __name__ =='__main__':
     with app.app_context():
         print("Starting seed...")
 
+        #clear existing data
+        db.session.query(Recipe).delete()
+        db.session.query(User).delete()
 
         users = []
         for _ in range(10):
             user = User(
-                username=fake.user_name())
+                username=fake.user_name(),
+                email=fake.email()
+                )
             users.append(user)
             db.session.add(user)
 
@@ -26,7 +31,13 @@ if __name__ =='__main__':
                 title=fake.sentence(nb_words=3),
                 description=fake.paragraph(),
                 ingredients=fake.text(),
-                image=fake.image_url()
+                instructions=fake.text(),
+                image=fake.image_url(),
+                time=fake.random_int(1,100),
+                calories=fake.random_int(1, 100),
+                protein=fake.random_int(1, 100),
+                carbs=fake.random_int(1, 100),
+                fats=fake.random_int(1, 100),
             )
             recipes.append(recipe)
             db.session.add(recipe)
