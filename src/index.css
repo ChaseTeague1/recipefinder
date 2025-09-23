@@ -147,6 +147,11 @@ body {
   padding-bottom: 10px;
 }
 
+.featured-recipes{
+  display: flex;
+  justify-content: center;
+}
+
 /* SearchBar inside Home */
 .search-name {
   background-color: #f78f1e;
@@ -237,61 +242,4 @@ body {
 
 
 /*Post recipe styling */
-.post-recipe-container{
-  display: grid;
-  justify-content: center;
-  margin: 2rem;
-  text-align: left;
-}
 
-.post-recipe-container h1{
-  color: #f78f1e;
-  font-weight: 900;
-  font-size: 3rem;
-}
-
-.post-recipe-container button{
-  background-color: #f78f1e;
-  border-radius: 50px;
-  color: white;
-  padding: 12px 28px;
-  font-size: 1.1rem;
-  font-weight: 800;
-  border: none;
-  display: inline-block;
-  text-align: center;
-  margin: 2rem;
-  transition: all 0.2s ease;
-}
-
-.post-recipe-container button:hover{
-  cursor: pointer;
-  transform: scale(1.05);
-  background-color: #e07b15;
-}
-
-.post-recipe-container label{
-  color:#f78f1e;
-  font-weight: 900;
-  font-size: 1.3rem;
-  margin: .5rem;
-  text-align: left;
-}
-
-.post-recipe-container input{
-  border-radius: 5px;
-  height: 3vh;
-  border: solid #f78f1e 2px;
-  background-color: #fff4e7;
-}
-
-.post-recipe-container textarea{
-  border-radius: 5px;
-  height: 6vh;
-  border: solid #f78f1e 2px;
-  background-color: #fff4e7;
-}
-
-button {
-  all: unset;
-}

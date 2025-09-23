@@ -21,7 +21,7 @@ function App() {
     <div className="app-container">
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home recipes={recipes}/>} />
         <Route path="/browse" element={<BrowseRecipe recipes={recipes}/>} />
         <Route path="/post" element={<PostRecipe />} />
         <Route path="/login" element={<LoginSignup />} />

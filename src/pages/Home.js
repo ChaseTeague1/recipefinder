@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from "react";
 import SearchBar from "../components/SearchBar";
+import RecipeCard from "../components/RecipeCard";
 
-function Home(){
+function Home({recipes}){
+    const featuredRecipes = recipes.slice(0, 5);
 
     return (
         <div className="home-container">
@@ -12,6 +14,13 @@ function Home(){
             </div>
             <div className="home-body">
                 <h1>Featured recipes</h1>
+                <div className="featured-recipes">
+                {
+                    featuredRecipes.map(recipe => (
+                        <RecipeCard recipe={recipe}/>
+                    ))
+                }
+                </div>
             </div>
         </div>
     )
