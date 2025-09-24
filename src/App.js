@@ -5,9 +5,9 @@ import Home from "./pages/Home";
 import BrowseRecipe from "./pages/BrowseRecipe";
 import PostRecipe from "./pages/PostRecipe";
 import LoginSignup from "./pages/LoginSignup";
+import RecipeDetailPage from "./pages/RecipeDetailPage";
 
 
-console.log("React version:", React.version);
 function App() {
     const [recipes, setRecipes] = useState([])
       
@@ -44,6 +44,7 @@ function App() {
         <Route path="/login" element={<LoginSignup />} />
         {/* Optional 404 page */}
         <Route path="*" element={<h1>404 Page Not Found</h1>} />
+        <Route path="/recipes/:id" element= {<RecipeDetailPage recipes={recipes}/>} />
       </Routes>
     </div>
   );
