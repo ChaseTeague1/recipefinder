@@ -58,6 +58,22 @@ class Recipes(Resource):
 
 api.add_resource(Recipes, '/recipes')
 
+class RecipeById(Resource):
+    def get(self,id):
+        recipe = Recipe.query.filter(Recipe.id == id).first()
+        return make_response(recipe.to_dict(), 200)
+    
+    def delete(self,id):
+        recipe = Recipe.query.filter(Recipe.id == id).first()
+
+        if recipe:
+            db.session.delete(recipe)
+            db.session.commit()
+        
+        body = {'message':'Recipe deleted'}
+        return make_response(body, 204)
+
+api.add_resource(RecipeById, '/recipes/<int:id>')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

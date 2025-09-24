@@ -17,13 +17,18 @@ function App() {
         .then(data => setRecipes(data))
     },[])
 
+
+    function onRecipeSubmit(newRecipe){
+      setRecipes([...recipes], newRecipe)
+    }
+
   return (
     <div className="app-container">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home recipes={recipes}/>} />
         <Route path="/browse" element={<BrowseRecipe recipes={recipes}/>} />
-        <Route path="/post" element={<PostRecipe />} />
+        <Route path="/post" element={<PostRecipe onRecipeSubmit={onRecipeSubmit}/>} />
         <Route path="/login" element={<LoginSignup />} />
         {/* Optional 404 page */}
         <Route path="*" element={<h1>404 Page Not Found</h1>} />
