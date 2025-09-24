@@ -19,7 +19,7 @@ function App() {
 
 
     function onRecipeSubmit(newRecipe){
-      setRecipes([...recipes], newRecipe)
+      setRecipes([...recipes, newRecipe])
     }
 
   return (
