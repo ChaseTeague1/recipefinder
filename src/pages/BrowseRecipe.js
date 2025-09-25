@@ -1,5 +1,6 @@
 import React from "react";
 import RecipeCard from "../components/RecipeCard";
+import {FaTrash} from 'react-icons/fa'
 
 
 function BrowseRecipe({recipes, handleDelete}){
@@ -7,9 +8,12 @@ function BrowseRecipe({recipes, handleDelete}){
         <div className="browse-recipe-div">
             {
                 recipes.map(recipe => (
-                    <div key={recipe.id}>
+                    <div className="card-containers" key={recipe.id}>
                         <RecipeCard recipe={recipe}/>
-                        <button onClick={() => handleDelete(recipe.id)}>Delete</button>
+                        <button className="delete-btn" onClick={() => handleDelete(recipe.id)}>
+                            <FaTrash />
+                            <span className="tooltip">Delete</span>
+                        </button>
                     </div>
                 ))
             }
@@ -17,4 +21,4 @@ function BrowseRecipe({recipes, handleDelete}){
     )
 }
 
-export default BrowseRecipe;
+export default BrowseRecipe; 

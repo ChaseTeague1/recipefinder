@@ -200,44 +200,104 @@ body {
 
 
 /*Recipecard styles*/
-.recipe-card{
-  max-width: 10vw;
-  min-width: 10vw;
-  justify-content: center;
-  display: grid;
-  max-height: 30vh;
-  min-height: 30vh;
-  text-align: left;
-  gap: 0;
-  margin: 1rem;
+.recipe-card {
+  width: 250px;
+  height: 340px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.recipe-card:hover{
+  transform: translateY(-5px);
 }
 
 .image-div{
-  max-width: 10vw;
-  min-width: 10vw;
-  max-height: 15vh;
-  min-height: 15vh;
-  border-radius: 10px;
-  margin: 0;
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
 }
 
 .recipe-card h1{
-  margin: 0;
-  padding: 0;
-  font-size: 25px;
+  margin: .5rem;
+  font-size: 1.2rem;
+  color: orange;
 }
 
 .recipe-card p{
-  margin: 0;
-  padding: 0;
+  margin: .5rem;
+  font-size: .9rem;
+  color: #555;
+  flex-grow: 1;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.card-containers{
+  position: relative;
+  display: inline-block;
+}
+
+.delete-btn{
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0,0,0,0.6);
+  border: none;
+  border-radius: 50%;
+  padding: 0.4rem;
+  color: white;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease, background 0.2s ease;
+}
+
+.card-containers:hover .delete-btn {
+  opacity: 1;
+}
+
+.delete-btn:hover {
+  background: rgba(255,0,0,0.7);
+}
+
+.tooltip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: -25px;
+  right: 50%;
+  transform: translateX(50%);
+  background: rgba(0,0,0,0.8);
+  color: white;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.delete-btn:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
 
 /* Browse recipe styling */
-.browse-recipe-div{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+.browse-recipe-div {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  justify-items: center;
+  padding: 2rem;
 }
 
 
@@ -297,14 +357,14 @@ body {
 
 .time-image-container .field-group {
     display: flex;
-    flex-direction: column; /* label above input */
-    flex: 1;                /* equal width */
+    flex-direction: column;
+    flex: 1;
 }
 
 .inline-input {
-    width: 100% !important; /* override global 100% rule if needed */
+    width: 100% !important;
     box-sizing: border-box;
-    height: 2.5rem;         /* same height for both inputs */
+    height: 2.5rem;
     padding: 0.5rem 0.75rem;
 }
 
