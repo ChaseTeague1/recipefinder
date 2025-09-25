@@ -2,6 +2,7 @@ from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from datetime import datetime
+from sqlalchemy.dialects.postgresql import JSON
 
 from config import db
 
@@ -14,8 +15,8 @@ class Recipe(db.Model, SerializerMixin):
     description = db.Column(db.String, nullable=False)
 
     #Multiple ingredients and instructions
-    ingredients = db.Column(db.String, nullable=False)
-    instructions = db.Column(db.String, nullable=False)
+    ingredients = db.Column(JSON, nullable=False)
+    instructions = db.Column(JSON, nullable=False)
 
     #Nutrition section
     calories = db.Column(db.Integer)

@@ -6,6 +6,8 @@ function RecipeDetailPage({recipes}){
     const {id} = useParams();
     const recipe = recipes.find(recipe => recipe.id == parseInt(id))
 
+    if(!recipe) return <div>Loading...</div>
+
     return (
         <div className="detail-page-container">
           <div className="detail-header-container">

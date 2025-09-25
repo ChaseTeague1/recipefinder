@@ -30,8 +30,8 @@ if __name__ =='__main__':
             recipe = Recipe(
                 title=fake.sentence(nb_words=3),
                 description=fake.paragraph(),
-                ingredients=fake.text(),
-                instructions=fake.text(),
+                ingredients=fake.words(nb=fake.random_int(3,7)),
+                instructions=[fake.sentence() for _ in range(fake.random_int(2,5))],
                 image=fake.image_url(),
                 time=fake.random_int(1,100),
                 calories=fake.random_int(1, 100),
