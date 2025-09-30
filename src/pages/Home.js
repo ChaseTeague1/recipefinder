@@ -17,7 +17,9 @@ function Home({recipes}){
                 <div className="featured-recipes">
                 {
                     featuredRecipes.map(recipe => (
-                        <RecipeCard recipe={recipe}/>
+                        <div className="card-containers" key={recipe.id}>
+                            <RecipeCard recipe={recipe}/>
+                        </div>
                     ))
                 }
                 </div>
