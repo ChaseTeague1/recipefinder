@@ -10,6 +10,7 @@ import RecipeDetailPage from "./pages/RecipeDetailPage";
 
 function App() {
     const [recipes, setRecipes] = useState([])
+    const [users, setUsers] = useState([])
       
     useEffect(() => {
         fetch('/recipes')
@@ -17,9 +18,18 @@ function App() {
         .then(data => setRecipes(data))
     },[])
 
+    useEffect(() => {
+      fetch('/users')
+      .then(res => res.json())
+      .then(data => setUsers(data))
+    }, [])
 
     function onRecipeSubmit(newRecipe){
       setRecipes([...recipes, newRecipe])
+    }
+
+    function onUserSubmit(newUser){
+      setUsers([...users, newUser])
     }
 
     function deleteRecipe(id){
@@ -41,7 +51,7 @@ function App() {
         <Route path="/" element={<Home recipes={recipes}/>} />
         <Route path="/browse" element={<BrowseRecipe handleDelete={deleteRecipe} recipes={recipes}/>} />
         <Route path="/post" element={<PostRecipe onRecipeSubmit={onRecipeSubmit}/>} />
-        <Route path="/login" element={<LoginSignup />} />
+        <Route path="/login" element={<LoginSignup onUserSubmit={onUserSubmit}/>} />
         {/* Optional 404 page */}
         <Route path="*" element={<h1>404 Page Not Found</h1>} />
         <Route path="/recipes/:id" element= {<RecipeDetailPage recipes={recipes}/>} />
