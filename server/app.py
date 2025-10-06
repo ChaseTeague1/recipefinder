@@ -39,6 +39,24 @@ class Users(Resource):
 
 api.add_resource(Users, '/users')
 
+class Login(Resource):
+    def post(self):
+        username = request.get_json()['username']
+        user = User.query.filter(User.username == username).first()
+
+        session['user_id'] = user.id
+
+        return make_response(user.to_dict(), 200)
+
+api.add_resource(Login, '/login')
+
+class Logout(Resource):
+    def delete(self):
+        session['user_id'] = None
+        return {}, 204
+
+api.add_resource(Logout, '/logout')
+
 
 #Recipe section
 class Recipes(Resource):

@@ -9,14 +9,16 @@ import RecipeDetailPage from "./pages/RecipeDetailPage";
 
 
 function App() {
+    const [currentUser, setCurrentUser] = useState(null)
     const [recipes, setRecipes] = useState([])
     const [users, setUsers] = useState([])
       
+    /*User related section */
     useEffect(() => {
-        fetch('/recipes')
-        .then(res => res.json())
-        .then(data => setRecipes(data))
-    },[])
+      fetch('/check_session')
+      .then(res => res.json())
+      .then(data => setCurrentUser(data))
+    }, [])
 
     useEffect(() => {
       fetch('/users')
@@ -24,13 +26,31 @@ function App() {
       .then(data => setUsers(data))
     }, [])
 
+    function onUserSubmit(newUser){
+      setUsers([...users, newUser])
+    }
+
+    function handleLogin(user){
+      setCurrentUser(user)
+    }
+
+    function handleLogout(){
+      setCurrentUser(null)
+    }
+
+
+    /*Recipe related section*/
+    useEffect(() => {
+        fetch('/recipes')
+        .then(res => res.json())
+        .then(data => setRecipes(data))
+    },[])
+
+
     function onRecipeSubmit(newRecipe){
       setRecipes([...recipes, newRecipe])
     }
 
-    function onUserSubmit(newUser){
-      setUsers([...users, newUser])
-    }
 
     function deleteRecipe(id){
       fetch(`/recipes/${id}`, {
