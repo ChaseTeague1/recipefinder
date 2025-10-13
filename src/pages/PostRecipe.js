@@ -73,14 +73,14 @@ function PostRecipe({onRecipeSubmit}){
             <h1>Add your own recipe!</h1>
             <h2>Recipe Info</h2>
             <label>Title</label>
-            {formik.errors.title && <div>{formik.errors.title}</div>}
+            {formik.errors.title && <div className="required">{formik.errors.title}</div>}
             <input 
                 name="title"
                 value={formik.values.title}
                 onChange={formik.handleChange}
             />
             <label>Description</label>
-            {formik.errors.description && <div>{formik.errors.description}</div>}
+            {formik.errors.description && <div className="required">{formik.errors.description}</div>}
             <textarea 
                 name="description"
                 value={formik.values.description}
@@ -133,7 +133,7 @@ function PostRecipe({onRecipeSubmit}){
              <button type="button" onClick={() => formik.setFieldValue('instructions', [...formik.values.instructions, ''])}>+ Add Step</button>
 
             <h2>Nutrition</h2>
-            {formik.errors.carbs && <div>{formik.errors.carbs}</div>}
+            {formik.errors.carbs && <div className="required">{formik.errors.carbs}</div>}
             <div className="nutrition-container">
                 <input name="calories" value={formik.values.calories} onChange={formik.handleChange} placeholder="calories"/>
                 <input name="protein" value={formik.values.protein} onChange={formik.handleChange} placeholder="protein"/>

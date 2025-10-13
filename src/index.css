@@ -429,6 +429,10 @@ a {
     100% { opacity: 0; }
 }
 
+.required{
+  color:red;
+  font-weight: 500;
+}
 
 
 /*Recipe Detail Page Styling */
