@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
+import defaultImage from '../image_default.png'
 
 
 function RecipeDetailPage({recipes}){
@@ -12,7 +13,14 @@ function RecipeDetailPage({recipes}){
         <div className="detail-page-container">
           <div className="detail-header-container">
             <h1>{recipe.title}</h1>
-            <img src={recipe.image} alt={recipe.title} />
+            <img 
+            src={recipe.image || defaultImage} 
+            alt={recipe.title} 
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = defaultImage;
+            }}
+            />
             <p>{recipe.time} min</p>
           </div>
             

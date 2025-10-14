@@ -3,6 +3,7 @@ import RecipeCard from "../components/RecipeCard";
 import {FaTrash} from 'react-icons/fa'
 
 
+
 function BrowseRecipe({recipes, handleDelete}){
 
     const confirmDelete = (id) => {
