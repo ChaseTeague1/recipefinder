@@ -23,6 +23,7 @@ function Home({recipes}){
                     ))
                 }
                 </div>
+                <p className="home-subtitle">If you can't find a recipe you enjoy, please feel free to add your own! <span id="happy-cooking">Happy cooking!</span></p>
             </div>
         </div>
     )

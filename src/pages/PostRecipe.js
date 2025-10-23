@@ -1,9 +1,10 @@
 import React, {useState} from "react";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
+import { Link } from "react-router-dom";
 
 
-function PostRecipe({onRecipeSubmit}){
+function PostRecipe({onRecipeSubmit, currentUser}){
     const [alert, setAlert] = useState(null)
 
     const validationSchema = Yup.object({
@@ -66,6 +67,19 @@ function PostRecipe({onRecipeSubmit}){
         }
     })
 
+    if(!currentUser){
+        return (
+            <div className="login-overlay">
+                <h2>Looks like you're not logged in!</h2>
+                <p>Please log in or sign up to post a recipe.</p>
+                <div>
+                    <Link to={'/login'} className="log-btn">
+                        Login / Signup
+                    </Link>
+                </div>
+            </div>
+        )
+    }
     return (
         <div className="post-recipe-wrapper" style={{position: "relative"}}>
         <form onSubmit={formik.handleSubmit} className="post-recipe-container">

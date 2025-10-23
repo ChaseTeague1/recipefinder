@@ -34,10 +34,6 @@ function App() {
       setCurrentUser(user)
     }
 
-    function handleLogout(){
-      setCurrentUser(null)
-    }
-
 
     /*Recipe related section*/
     useEffect(() => {
@@ -66,11 +62,11 @@ function App() {
 
   return (
     <div className="app-container">
-      <Navbar />
+      <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser} />
       <Routes>
         <Route path="/" element={<Home recipes={recipes}/>} />
         <Route path="/browse" element={<BrowseRecipe handleDelete={deleteRecipe} recipes={recipes}/>} />
-        <Route path="/post" element={<PostRecipe onRecipeSubmit={onRecipeSubmit}/>} />
+        <Route path="/post" element={<PostRecipe onRecipeSubmit={onRecipeSubmit} currentUser={currentUser}/>} />
         <Route path="/login" element={<LoginSignup onUserSubmit={onUserSubmit}/>} />
         {/* Optional 404 page */}
         <Route path="*" element={<h1>404 Page Not Found</h1>} />

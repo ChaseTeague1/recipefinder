@@ -29,11 +29,16 @@ function RecipeDetailPage({recipes}){
               <div className="detail-ing-container">
                 <div>
                   <label>Ingredients</label>
-                  <p>{recipe.ingredients}</p>
+                  <ul>{recipe.ingredients.map((ing, i)=> (
+                      <li key={i}>{ing}</li>
+                  ))}</ul>
                 </div>
                 <div>
                   <label>Instructions</label>
-                  <p>{recipe.instructions}</p>
+                  <ol>{recipe.instructions.map((step, i) => (
+                      <li key={i}>{step}</li>
+                  ))}
+                  </ol>
                 </div>
               </div>
             </div>
