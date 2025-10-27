@@ -131,6 +131,8 @@ body {
   padding: 2rem;
   position: relative;
   border-radius: 8px;
+  min-width: 500px;
+  min-height: 350px;
 }
 .close-modal-btn {
   position: absolute;
@@ -141,27 +143,6 @@ body {
   font-size: 1.5rem;
   cursor: pointer;
 }
-/* 📱 Mobile navbar view */
-@media (max-width: 768px) {
-  .nav-bar-container {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1rem;
-  }
-
-  .nav-right {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-
-  .nav-links {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-}
-
 
 
 /*Home.js styling */
@@ -240,31 +221,6 @@ body {
   cursor: pointer;
   transform: scale(1.05);
   background-color: #e07b15;
-}
-
-/* 📱 Mobile home styles */
-@media (max-width: 768px) {
-  .header h1 {
-    font-size: 2rem;
-  }
-
-  .header p {
-    font-size: 1rem;
-  }
-
-  .search-name {
-    width: 100%;
-    padding: 12px;
-    font-size: 1rem;
-  }
-
-  .home-body {
-    text-align: center;
-  }
-
-  .home-body h1 {
-    font-size: 1.4rem;
-  }
 }
 
 
@@ -611,31 +567,53 @@ a {
   }
 
   /* NavBar adjustments */
+  .nav-bar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
   #recipe-finder {
     font-size: 2rem;
     text-align: center;
   }
 
-  .nav-bar-container {
-    flex-direction: column;
-    align-items: center;
-    padding: 0.5rem 1rem;
-  }
-
+  /* Keep nav-right horizontal */
   .nav-right {
-    flex-direction: column;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
+    gap: 1rem; /* space between links and login/logout */
+    width: 100%;
+    flex-wrap: wrap; /* wrap if screen is too small */
   }
 
+  /* Nav links horizontal */
   .nav-links {
-    flex-direction: column;
-    gap: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  .nav-links li {
+    list-style: none;
   }
 
   .nav-links li a {
-    font-size: 1rem;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    text-align: center;
+  }
+
+  /* Optional: make login/logout block smaller on tiny screens */
+  .nav-right p, 
+  .nav-right .login-signup-btn {
+    font-size: 0.9rem;
   }
 
   /* Home header & search */

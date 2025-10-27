@@ -1,12 +1,26 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
+import * as Yup from 'yup';
 
-function LoginSignup({ onUserSubmit, onClose }) {
+function LoginSignup({ onUserSubmit, onClose, setShowModal }) {
   const [alert, setAlert] = useState(null);
   const [isLogin, setIsLogin] = useState(false);
 
+  const validationSchema = Yup.object({
+    username: Yup.string()
+                .required('* Required')
+                .min(1, 'Username must be atleast 1 character long'),
+    email: Yup.string()
+            .email('Invalid email format')
+            .required('* Required')
+  })
+
   const formik = useFormik({
-    initialValues: { username: "", email: "" },
+    initialValues: { 
+        username: '', 
+        email: '' 
+    },
+    validationSchema,
     onSubmit: (values, { setSubmitting, resetForm }) => {
       const url = isLogin ? "/login" : "/users";
       fetch(url, {
@@ -45,13 +59,14 @@ function LoginSignup({ onUserSubmit, onClose }) {
         <form onSubmit={formik.handleSubmit} className="post-recipe-container">
           {alert && <div className="success-alert">{alert}</div>}
           <h1>{isLogin ? "Login" : "Sign up"}</h1>
-
+            {formik.errors.username && <div>{formik.errors.username}</div>}
           <input
             placeholder="Username"
             name="username"
             value={formik.values.username}
             onChange={formik.handleChange}
           />
+          {formik.errors.email && <div>{formik.errors.email}</div>}
           <input
             placeholder="Email"
             name="email"

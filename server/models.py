@@ -32,6 +32,8 @@ class Recipe(db.Model, SerializerMixin):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     user = db.relationship("User", backref='recipes')
 
+    serialize_rules = ('-user.recipes',)
+
 
 
 class User(db.Model, SerializerMixin):

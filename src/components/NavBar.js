@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import LoginSignup from "../pages/LoginSignup";
 
-function Navbar({ currentUser, setCurrentUser }) {
-  const [showModal, setShowModal] = useState(false);
+function Navbar({ currentUser, setCurrentUser, showModal, setShowModal }) {
 
   const handleLogout = () => {
     fetch("/logout", { method: "DELETE" })
-      .then(r => { if (r.ok) setCurrentUser(null); })
+      .then(r => {
+        if (r.ok) setCurrentUser(null);
+      })
       .catch(console.error);
   };
 
@@ -15,6 +16,7 @@ function Navbar({ currentUser, setCurrentUser }) {
     <>
       <nav className="nav-bar-container">
         <h2 id="recipe-finder">Recipe Finder</h2>
+
         <div className="nav-right">
           <ul className="nav-links">
             <li><Link to="/">Home</Link></li>
@@ -23,11 +25,22 @@ function Navbar({ currentUser, setCurrentUser }) {
           </ul>
 
           {currentUser ? (
-            <button className="login-signup-btn" style={{ all: "unset", cursor: "pointer" }} onClick={handleLogout}>
-              Logout
-            </button>
+            <>
+              <p>Welcome, {currentUser.username}!</p>
+              <button
+                className="login-signup-btn"
+                style={{ all: "unset", cursor: "pointer" }}
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+            </>
           ) : (
-            <span className="login-signup-btn" style={{ cursor: "pointer" }} onClick={() => setShowModal(true)}>
+            <span
+              className="login-signup-btn"
+              style={{ cursor: "pointer" }}
+              onClick={() => setShowModal(true)}
+            >
               Login / Signup
             </span>
           )}
@@ -36,7 +49,10 @@ function Navbar({ currentUser, setCurrentUser }) {
 
       {showModal && (
         <LoginSignup
-          onUserSubmit={(user) => { setCurrentUser(user); setShowModal(false); }}
+          onUserSubmit={(user) => {
+            setCurrentUser(user);
+            setShowModal(false);
+          }}
           onClose={() => setShowModal(false)}
         />
       )}
@@ -45,3 +61,4 @@ function Navbar({ currentUser, setCurrentUser }) {
 }
 
 export default Navbar;
+

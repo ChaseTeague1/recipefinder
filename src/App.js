@@ -12,6 +12,7 @@ function App() {
     const [currentUser, setCurrentUser] = useState(null)
     const [recipes, setRecipes] = useState([])
     const [users, setUsers] = useState([])
+    const [showLoginModal, setShowLoginModal] = useState(false)
       
     /*User related section */
     useEffect(() => {
@@ -67,12 +68,22 @@ function App() {
 
   return (
     <div className="app-container">
-      <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser} />
+      <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser} showModal={showLoginModal} setShowModal={setShowLoginModal}/>
+      {
+          showLoginModal && (
+            <LoginSignup 
+             onUserSubmit={(user) => {
+              setCurrentUser(user)
+              setShowLoginModal(false)
+             }}
+             onClose={() => setShowLoginModal(false)}
+            />
+          )
+        }
       <Routes>
         <Route path="/" element={<Home recipes={recipes}/>} />
         <Route path="/browse" element={<BrowseRecipe handleDelete={deleteRecipe} recipes={recipes}/>} />
-        <Route path="/post" element={<PostRecipe onRecipeSubmit={onRecipeSubmit} currentUser={currentUser}/>} />
-        <Route path="/login" element={<LoginSignup onUserSubmit={onUserSubmit}/>} />
+        <Route path="/post" element={<PostRecipe onRecipeSubmit={onRecipeSubmit} currentUser={currentUser} showModal={showLoginModal} setShowModal={setShowLoginModal}/>} />
         {/* Optional 404 page */}
         <Route path="*" element={<h1>404 Page Not Found</h1>} />
         <Route path="/recipes/:id" element= {<RecipeDetailPage recipes={recipes}/>} />
