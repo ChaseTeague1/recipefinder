@@ -1,68 +1,88 @@
+import React, { useState } from "react";
 import { useFormik } from "formik";
-import React, {useState} from "react";
-import { BiColor } from "react-icons/bi";
-import { useSearchParams } from "react-router-dom";
 
+function LoginSignup({ onUserSubmit, onClose }) {
+  const [alert, setAlert] = useState(null);
+  const [isLogin, setIsLogin] = useState(false);
 
-function LoginSignup({onUserSubmit}){
-    const [alert, setAlert] = useState(null)
+  const formik = useFormik({
+    initialValues: { username: "", email: "" },
+    onSubmit: (values, { setSubmitting, resetForm }) => {
+      const url = isLogin ? "/login" : "/users";
+      fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values)
+      })
+        .then(r => { if (!r.ok) throw new Error("Request failed"); return r.json(); })
+        .then(data => {
+          onUserSubmit(data);
+          resetForm();
+          setAlert(isLogin ? "Logged in!" : "Signed up!");
+          setTimeout(() => setAlert(null), 3000);
+          if (onClose) onClose();
+        })
+        .catch(() => {
+          setAlert(isLogin ? "Login failed" : "Signup failed");
+          setTimeout(() => setAlert(null), 3000);
+        })
+        .finally(() => setSubmitting(false));
+    }
+  });
 
-    const formik = useFormik({
-        initialValues : {
-            username: '',
-            email: ''
-        },
-        onSubmit : (values, {setSubmitting, resetForm}) => {
-            fetch('/users', {
-                method: "POST",
-                headers:{
-                    'Content-Type' : 'application/json'
-                },
-                body: JSON.stringify(values)
-            })
-            .then(res => {
-                if(!res.ok) throw new Error("Failed to add user")
-                return res.json()
-            })
-            .then(data => {
-                onUserSubmit(data)
-                resetForm();
-                setAlert('User successfully added!')
-                setTimeout(() => setAlert(null), 3000)
-            })
-            .catch(err => {
-                console.log(err)
-                setAlert('Failed to add user')
-                setTimeout(() => setAlert(null), 3000)
-            })
-            .finally(() => setSubmitting(false))
-        }
-    })
+  return (
+    <div className="modal-overlay">
+      <div className="modal-content" role="dialog" aria-modal="true">
+        <button
+          type="button"
+          className="close-modal-btn"
+          onClick={() => { console.log("close clicked"); if (onClose) onClose(); }}
+          aria-label="Close"
+        >
+          ✕
+        </button>
 
-    return (
-        <div className="post-recipe-container">
-            <form onSubmit={formik.handleSubmit}>
-                {alert && <div className="success-alert">{alert}</div>}
-            <h1>Sign up</h1>
-            <div>
-                <input 
-                placeholder="Username"
-                value={formik.values.username}
-                onChange={formik.handleChange}
-                name="username"
-                />
-                <input 
-                placeholder="Email"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                name="email"
-                />
-                <p>already have an account? <a>Login!</a></p>
-            </div>
-            <button type="submit" disabled={formik.isSubmitting}>Sign up</button>
-            </form>
-        </div>
-    )
+        <form onSubmit={formik.handleSubmit} className="post-recipe-container">
+          {alert && <div className="success-alert">{alert}</div>}
+          <h1>{isLogin ? "Login" : "Sign up"}</h1>
+
+          <input
+            placeholder="Username"
+            name="username"
+            value={formik.values.username}
+            onChange={formik.handleChange}
+          />
+          <input
+            placeholder="Email"
+            name="email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+          />
+
+          {isLogin ? (
+            <p>
+              Don’t have an account?{" "}
+              <span onClick={() => setIsLogin(false)} style={{ cursor: "pointer", color: "blue" }}>
+                Sign up!
+              </span>
+            </p>
+          ) : (
+            <p>
+              Already have an account?{" "}
+              <span onClick={() => setIsLogin(true)} style={{ cursor: "pointer", color: "blue" }}>
+                Login!
+              </span>
+            </p>
+          )}
+
+          <button type="submit" disabled={formik.isSubmitting}>
+            {isLogin ? "Login" : "Sign up"}
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 }
 
 export default LoginSignup;
+

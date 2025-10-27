@@ -16,8 +16,13 @@ function App() {
     /*User related section */
     useEffect(() => {
       fetch('/check_session')
-      .then(res => res.json())
-      .then(data => setCurrentUser(data))
+      .then((r) => {
+        if(r.ok){
+          r.json().then(user => setCurrentUser(user))
+        } else {
+          setCurrentUser(null)
+        }
+      })
     }, [])
 
     useEffect(() => {
