@@ -15,7 +15,6 @@ body {
   margin-top: 40px;
   margin-left: auto;
   margin-right: auto;
-  overflow: hidden;
 }
 
 
@@ -28,6 +27,8 @@ body {
   max-width: 70vw;
   margin: 0 auto;
   background-color: #fff;
+  position: relative;
+  z-index: 10;
 }
 
 #recipe-finder {
@@ -126,6 +127,17 @@ body {
   align-items: center;
   z-index: 9999;
 }
+
+.modal-overlay[hidden] {
+  display: none !important;
+  pointer-events: none !important;
+}
+
+.modal-overlay.closing {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .modal-content {
   background: white;
   padding: 2rem;
@@ -150,7 +162,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 60px;
   text-align: center;
   padding: 0 20px;
 }
@@ -188,6 +199,7 @@ body {
 }
 
 .featured-recipes{
+  width: fit-content;
   display: flex;
   justify-content: center;
   gap: 15px;
@@ -558,12 +570,13 @@ a {
 @media (max-width: 768px) {
   /* App container */
   .app-container {
+    width: fit-content;
     max-width: 100%;
-    min-width: 100%;
     border-radius: 0;
     box-shadow: none;
-    margin-top: 20px;
-    padding: 0 10px;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
   }
 
   /* NavBar adjustments */
@@ -571,7 +584,8 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.3rem;
+    padding: 0.5rem;
   }
 
   #recipe-finder {
@@ -579,25 +593,29 @@ a {
     text-align: center;
   }
 
-  /* Keep nav-right horizontal */
+  /* Horizontal nav links */
   .nav-right {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    gap: 1rem; /* space between links and login/logout */
     width: 100%;
-    flex-wrap: wrap; /* wrap if screen is too small */
   }
 
-  /* Nav links horizontal */
   .nav-links {
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 1rem;
-    padding: 0;
+    flex-wrap: wrap;
+    padding: 0.5rem;
     margin: 0;
+    background-color: #e07b15;
+    border-radius: 8px;
+    width: 100%;
+  }
+
+  .nav-links li a:hover{
+    color: #695a4b;
   }
 
   .nav-links li {
@@ -608,10 +626,16 @@ a {
     display: block;
     padding: 0.5rem 0.75rem;
     text-align: center;
+    font-size: 1rem;
+    color: white;
   }
 
-  /* Optional: make login/logout block smaller on tiny screens */
-  .nav-right p, 
+  .login-signup-btn{
+    background-color: #e07b15;
+    color: white;
+  }
+
+  .nav-right p,
   .nav-right .login-signup-btn {
     font-size: 0.9rem;
   }
@@ -624,32 +648,66 @@ a {
     font-size: 1rem;
   }
   .search-name {
-    width: 100%;
+    width: fit-content;
     font-size: 1rem;
     padding: 10px;
   }
 
-  /* Recipe cards grid */
+  /* Featured recipes - horizontal scroll */
+  .featured-recipes {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 1rem;
+    padding: 1rem;
+    margin: 0;
+    width: 350px;
+    box-sizing: border-box;
+  }
+
+  .featured-recipes::-webkit-scrollbar {
+    display: none;
+  }
+
+  .card-containers {
+    flex: 0 0 80%;
+    max-width: 320px;
+    min-width: 320px;
+    scroll-snap-align: start;
+    box-sizing: border-box;
+  }
+
+  .card-containers:first-child {
+    margin-left: 0;
+  }
+
+  .card-containers:last-child {
+    margin-right: 1rem;
+  }
+
+  .recipe-card {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Recipe card grid (browse page) */
   .browse-recipe-div {
+    display: grid;
     grid-template-columns: 1fr;
     padding: 1rem;
     gap: 1rem;
   }
 
-  /* Recipe card image & size */
-  .recipe-card {
-    width: 100%;
-    max-width: 350px;
-    height: auto;
-  }
-  .image-div {
-    height: 180px;
-  }
-
-  /* Post recipe container adjustments */
+  /* Post recipe */
   .post-recipe-container {
     padding: 1rem;
     margin: 1rem;
+  }
+
+  .login-overlay{
+    width: fit-content;
   }
 
   .time-image-container {
@@ -664,6 +722,7 @@ a {
   .nutrition-container {
     flex-direction: column;
   }
+
   .nutrition-container input {
     text-align: left;
   }
@@ -673,11 +732,9 @@ a {
   }
 
   /* Detail page adjustments */
-  .detail-header-container img {
-    width: 100%;
-    min-width: auto;
-    max-width: 100%;
-    height: auto;
+  .detail-header-container img{
+    min-width: 350px;
+    min-width: 360px;
   }
 
   .detail-body-container {
@@ -692,6 +749,11 @@ a {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 1rem;
+  }
+
+
+  .modal-content{
+    min-width: 330px;
   }
 }
 

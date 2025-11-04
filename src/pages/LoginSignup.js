@@ -50,7 +50,15 @@ function LoginSignup({ onUserSubmit, onClose, setShowModal }) {
         <button
           type="button"
           className="close-modal-btn"
-          onClick={() => { console.log("close clicked"); if (onClose) onClose(); }}
+          onClick={() => {
+            const overlay = document.querySelector('.modal-overlay');
+            if (overlay){
+                overlay.classList.add('closing');
+            }
+            setTimeout(() => {
+                if(onClose) onClose();
+            }, 150)
+          }}
           aria-label="Close"
         >
           ✕

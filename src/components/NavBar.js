@@ -46,16 +46,6 @@ function Navbar({ currentUser, setCurrentUser, showModal, setShowModal }) {
           )}
         </div>
       </nav>
-
-      {showModal && (
-        <LoginSignup
-          onUserSubmit={(user) => {
-            setCurrentUser(user);
-            setShowModal(false);
-          }}
-          onClose={() => setShowModal(false)}
-        />
-      )}
     </>
   );
 }
