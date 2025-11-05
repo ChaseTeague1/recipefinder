@@ -4,7 +4,7 @@ import {FaTrash} from 'react-icons/fa'
 
 
 
-function BrowseRecipe({recipes, handleDelete}){
+function BrowseRecipe({recipes, handleDelete, currentUser}){
 
     const confirmDelete = (id) => {
         if (window.confirm('Are you sure you want to delete this recipe?')){
@@ -18,10 +18,14 @@ function BrowseRecipe({recipes, handleDelete}){
                 recipes.map(recipe => (
                     <div className="card-containers" key={recipe.id}>
                         <RecipeCard recipe={recipe}/>
-                        <button className="delete-btn" onClick={() => confirmDelete(recipe.id)}>
-                            <FaTrash />
-                            <span className="tooltip">Delete</span>
-                        </button>
+                        {
+                            currentUser?.username === 'admin_chase' && (
+                                <button className="delete-btn" onClick={() => confirmDelete(recipe.id)}>
+                                    <FaTrash />
+                                    <span className="tooltip">Delete</span>
+                                </button>
+                            )
+                        }
                     </div>
                 ))
             }

@@ -82,7 +82,7 @@ function App() {
         }
       <Routes>
         <Route path="/" element={<Home recipes={recipes}/>} />
-        <Route path="/browse" element={<BrowseRecipe handleDelete={deleteRecipe} recipes={recipes}/>} />
+        <Route path="/browse" element={<BrowseRecipe handleDelete={deleteRecipe} recipes={recipes} currentUser={currentUser}/>} />
         <Route path="/post" element={<PostRecipe onRecipeSubmit={onRecipeSubmit} currentUser={currentUser} showModal={showLoginModal} setShowModal={setShowLoginModal}/>} />
         {/* Optional 404 page */}
         <Route path="*" element={<h1>404 Page Not Found</h1>} />

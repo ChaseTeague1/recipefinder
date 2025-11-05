@@ -32,7 +32,7 @@ class Recipe(db.Model, SerializerMixin):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     user = db.relationship("User", backref='recipes')
 
-    serialize_rules = ('-user.recipes',)
+    serialize_rules = ('-user.recipes', 'user.username')
 
 
 
@@ -41,6 +41,6 @@ class User(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    username = db.Column(db.String, nullable=False)
-    email = db.Column(db.String, nullable=False)
+    username = db.Column(db.String, unique=True, nullable=False)
+    email = db.Column(db.String, unique=True, nullable=False)
     

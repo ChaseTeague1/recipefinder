@@ -37,7 +37,7 @@ function LoginSignup({ onUserSubmit, onClose, setShowModal }) {
           if (onClose) onClose();
         })
         .catch(() => {
-          setAlert(isLogin ? "Login failed" : "Signup failed");
+          setAlert(isLogin ? "Login failed" : "Signup failed (credentials must be unique)");
           setTimeout(() => setAlert(null), 3000);
         })
         .finally(() => setSubmitting(false));

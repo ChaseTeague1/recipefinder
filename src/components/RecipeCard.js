@@ -19,6 +19,7 @@ function RecipeCard({recipe}){
             />
             <h1>{recipe.title}</h1>
             <p>{recipe.description}</p>
+            <p>Posted by: {recipe.user?.username || 'Unknown'}</p>
         </div>
         </Link>
     )
